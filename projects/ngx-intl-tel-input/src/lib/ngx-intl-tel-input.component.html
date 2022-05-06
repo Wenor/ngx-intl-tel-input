@@ -37,6 +37,12 @@
                (blur)="onBlurEvent()"
                (focus)="onFocusEvent()"
                (keydown)="ngxIntlTelInputService.onInputKeyPress($event)">
+        <button *ngIf="clearIcon"
+                mat-icon-button
+                matSuffix
+                (click)="onClearClick($event)">
+            <mat-icon>{{ clearIcon }}</mat-icon>
+        </button>
         <mat-error *ngIf="matErrorContainer.children.length === 0 && hasError">
             {{ (errors && errors[errorKey]) || control.getError(errorKey) }}
         </mat-error>

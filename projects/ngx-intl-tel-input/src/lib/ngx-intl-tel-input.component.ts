@@ -150,6 +150,18 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   @Input()
   errors: Record<string, string>;
 
+  @Input()
+  set clearable(icon: string) {
+    if (typeof icon === 'boolean') {
+      return;
+    }
+    if (!icon) {
+      this.clearIcon = 'close';
+      return;
+    }
+    this.clearIcon = icon;
+  }
+
   @Output()
   countryChange = new EventEmitter<Country>();
 
@@ -164,6 +176,9 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
 
   @Output()
   menuOpened = new EventEmitter<boolean>();
+
+  @Output()
+  clear = new EventEmitter<void>();
 
   get dropdownClass(): string | string[] {
     return [
@@ -219,6 +234,8 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   phoneUtil: any = lpn.PhoneNumberUtil.getInstance();
   disabled = false;
 
+  clearIcon: string = null;
+
   dropdownParamsData: CountryDropdownDisplayOptions[] = [
     CountryDropdownDisplayOptions.Dial,
     CountryDropdownDisplayOptions.Flag,
@@ -242,8 +259,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   }
 
   ngOnInit() {
-    this.init();
-
+    this._init();
     this.ngxDropdownService.onMenuClose.subscribe(() => this.isMenuClose());
   }
 
@@ -267,7 +283,14 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
-  private init(): void {
+  onClearClick(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.writeValue(null);
+    this.clear.emit();
+  }
+
+  private _init(): void {
     this.ngxIntlTelInputService.fetchCountryData(this.enablePlaceholder);
     if (this.preferredCountries.length) {
       this.preferredCountriesInDropDown = this.ngxIntlTelInputService.getPreferredCountries(this.preferredCountries);
@@ -406,7 +429,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
 
   writeValue(obj: any): void {
     if (obj == null) {
-      this.init();
+      this._init();
     }
     this.phoneNumber = obj;
     setTimeout(() => {
