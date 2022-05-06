@@ -13,6 +13,7 @@ import {ComponentsModule} from './components/components.module';
 import {NgxDropdownService} from './services/ngx-dropdown.service';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {NgxIntlTelFormService} from './services/ngx-intl-tel-form.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [NgxIntlTelInputComponent],
@@ -27,7 +28,8 @@ import {NgxIntlTelFormService} from './services/ngx-intl-tel-form.service';
     MatMenuModule,
     MatDividerModule,
     ComponentsModule,
-    ScrollingModule
+    ScrollingModule,
+    MatIconModule
   ],
   providers: [
     NgxIntlTelFormService,
