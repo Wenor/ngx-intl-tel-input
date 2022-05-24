@@ -51,7 +51,10 @@ import {NgxIntlTelModelAdapter} from './services/ngx-intl-tel-model-adapter';
     },
     {
       provide: NG_VALIDATORS,
-      useValue: phoneNumberValidator,
+      useFactory: (ngxIntlTelModelAdapter: NgxIntlTelModelAdapter) => {
+        return phoneNumberValidator(ngxIntlTelModelAdapter);
+      },
+      deps: [NgxIntlTelModelAdapter],
       multi: true,
     }
   ]
@@ -223,6 +226,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   preferredCountriesInDropDown: Array<Country> = [];
   // Has to be 'any' to prevent a need to install @types/google-libphonenumber by the package user...
   phoneUtil: any = lpn.PhoneNumberUtil.getInstance();
+
   disabled = false;
 
   dropdownParamsData: CountryDropdownDisplayOptions[] = [
@@ -274,6 +278,22 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  writeValue(obj: any): void {
+    this.phoneNumber = this.ngxIntlTelModelAdapter.valueToString(obj);
+  }
+
   private init(): void {
     this.ngxIntlTelInputService.fetchCountryData(this.enablePlaceholder);
     if (this.preferredCountries.length) {
@@ -315,7 +335,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
-  public onPhoneNumberChange(): void {
+  onPhoneNumberChange(): void {
     this.value = this.phoneNumber;
 
     let number: lpn.PhoneNumber;
@@ -363,7 +383,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
-  public onCountrySelect(country: Country, el?: HTMLInputElement): void {
+  onCountrySelect(country: Country, el?: HTMLInputElement): void {
     this.ngxDropdownService.close();
     this.setSelectedCountry(country);
     this.checkSeparateDialCodeStyle();
@@ -399,28 +419,6 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     if (el) {
       el.focus();
     }
-  }
-
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  writeValue(obj: any): void {
-    if (obj == null) {
-      this.init();
-    }
-    this.phoneNumber = this.ngxIntlTelModelAdapter.valueToString(obj);
-    setTimeout(() => {
-      this.onPhoneNumberChange();
-    }, 1);
   }
 
   removeDialCode(phoneNumber: string): string {

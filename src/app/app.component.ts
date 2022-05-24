@@ -31,8 +31,8 @@ export class AppComponent {
   preferredCountries: CountryISO[] = [CountryISO.Ukraine, CountryISO.Russia, CountryISO.Israel];
   phoneForm = new FormGroup({
     phone: new FormControl({
-      'nationalNumber': '066 223 3456',
-      'dialCode': '+380',
+      'nationalNumber': '662233456',
+      'dialCode': '380',
     }, [Validators.required])
   });
 

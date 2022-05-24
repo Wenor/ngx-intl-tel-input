@@ -7,13 +7,13 @@ import {PhoneModel} from './phone.model';
 export class NgxIntlTelModelAdapterService extends NgxIntlTelModelAdapter {
 
   valueToString(value: PhoneModel): string {
-    return value ? `${value.dialCode}${value.nationalNumber}` : '';
+    return value ? `+${value.dialCode}${value.nationalNumber}` : '';
   }
 
   modelToValue(intlTelModel: IntlTelModel) {
     return {
-      'nationalNumber': intlTelModel.nationalNumber,
-      'dialCode': intlTelModel.dialCode,
+      'nationalNumber': intlTelModel.number.replace(intlTelModel.dialCode, ''),
+      'dialCode': intlTelModel.dialCode.replace('+', ''),
     };
   }
 
