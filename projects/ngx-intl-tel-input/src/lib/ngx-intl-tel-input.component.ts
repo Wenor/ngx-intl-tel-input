@@ -253,10 +253,10 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   ];
 
   onTouched = () => {
-  }
+  };
 
   propagateChange = (_: IntlTelModel | null) => {
-  }
+  };
 
   control: FormControl;
 
@@ -504,7 +504,8 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   onClearClick(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
-    this.writeValue(null);
+    this.phoneNumber = '';
+    this.propagateChange(null);
     this.clear.emit();
   }
 }
