@@ -1,33 +1,39 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
-  Component, ElementRef,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
   EventEmitter,
   forwardRef,
-  HostListener, Injector,
+  HostListener,
+  Injector,
   Input,
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges, TemplateRef,
+  SimpleChanges,
+  TemplateRef,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
 import {FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
-import {CountryCode} from './data/country-code';
-import {phoneNumberValidator} from './ngx-intl-tel-input.validator';
-import {Country} from './model/country.model';
-import * as lpn from 'google-libphonenumber';
-import {TooltipLabel} from './enums/tooltip-label.enum';
-import {CountryISO} from './enums/country-iso.enum';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {CountryDropdownDisplayOptions} from './enums/country-dropdown-display-options.enum';
-import {NgxIntlTelInputService} from './services/ngx-intl-tel-input.service';
-import {SearchCountryField} from './enums/search-country-field.enum';
-import {NgxDropdownService} from './services/ngx-dropdown.service';
-import {NgxIntlTelInputErrorMatcher} from './services/ngx-intl-tel-input-error-matcher';
-import {NgxIntlTelFormService} from './services/ngx-intl-tel-form.service';
 import {FloatLabelType} from '@angular/material/form-field';
+import * as lpn from 'google-libphonenumber';
+import {CountryCode} from './data/country-code';
+import {CountryDropdownDisplayOptions} from './enums/country-dropdown-display-options.enum';
+import {CountryISO} from './enums/country-iso.enum';
+import {SearchCountryField} from './enums/search-country-field.enum';
+import {TooltipLabel} from './enums/tooltip-label.enum';
+import {Country} from './model/country.model';
+import {IntlTelModel} from './model/intl-tel.model';
+import {phoneNumberValidator} from './ngx-intl-tel-input.validator';
+import {NgxDropdownService} from './services/ngx-dropdown.service';
+import {NgxIntlTelFormService} from './services/ngx-intl-tel-form.service';
+import {NgxIntlTelInputErrorMatcher} from './services/ngx-intl-tel-input-error-matcher';
+import {NgxIntlTelInputService} from './services/ngx-intl-tel-input.service';
+import {NgxIntlTelModelAdapter} from './services/ngx-intl-tel-model-adapter';
 
 @Component({
   selector: 'ngx-intl-tel-input',
@@ -45,7 +51,10 @@ import {FloatLabelType} from '@angular/material/form-field';
     },
     {
       provide: NG_VALIDATORS,
-      useValue: phoneNumberValidator,
+      useFactory: (ngxIntlTelModelAdapter: NgxIntlTelModelAdapter) => {
+        return phoneNumberValidator(ngxIntlTelModelAdapter);
+      },
+      deps: [NgxIntlTelModelAdapter],
       multi: true,
     }
   ]
@@ -150,6 +159,18 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   @Input()
   errors: Record<string, string>;
 
+  @Input()
+  set clearable(icon: string) {
+    if (typeof icon === 'boolean') {
+      return;
+    }
+    if (!icon) {
+      this.clearIcon = 'close';
+      return;
+    }
+    this.clearIcon = icon;
+  }
+
   @Output()
   countryChange = new EventEmitter<Country>();
 
@@ -164,6 +185,9 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
 
   @Output()
   menuOpened = new EventEmitter<boolean>();
+
+  @Output()
+  clear = new EventEmitter<void>();
 
   get dropdownClass(): string | string[] {
     return [
@@ -217,7 +241,10 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   preferredCountriesInDropDown: Array<Country> = [];
   // Has to be 'any' to prevent a need to install @types/google-libphonenumber by the package user...
   phoneUtil: any = lpn.PhoneNumberUtil.getInstance();
+
   disabled = false;
+
+  clearIcon: string = null;
 
   dropdownParamsData: CountryDropdownDisplayOptions[] = [
     CountryDropdownDisplayOptions.Dial,
@@ -226,24 +253,24 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   ];
 
   onTouched = () => {
-  }
+  };
 
-  propagateChange = (_: any) => {
-  }
+  propagateChange = (_: IntlTelModel | null) => {
+  };
 
   control: FormControl;
 
   constructor(public readonly ngxIntlTelInputService: NgxIntlTelInputService,
               public readonly ngxIntlTelForm: NgxIntlTelFormService,
               public readonly ngxDropdownService: NgxDropdownService,
+              private readonly ngxIntlTelModelAdapter: NgxIntlTelModelAdapter,
               private readonly viewContainerRef: ViewContainerRef,
               private readonly changeDetector: ChangeDetectorRef,
               private injector: Injector) {
   }
 
   ngOnInit() {
-    this.init();
-
+    this._init();
     this.ngxDropdownService.onMenuClose.subscribe(() => this.isMenuClose());
   }
 
@@ -267,7 +294,23 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
-  private init(): void {
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  writeValue(obj: any): void {
+    this.phoneNumber = this.ngxIntlTelModelAdapter.valueToString(obj);
+  }
+
+  private _init(): void {
     this.ngxIntlTelInputService.fetchCountryData(this.enablePlaceholder);
     if (this.preferredCountries.length) {
       this.preferredCountriesInDropDown = this.ngxIntlTelInputService.getPreferredCountries(this.preferredCountries);
@@ -302,13 +345,13 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
         if (this.phoneNumber) {
           this.onPhoneNumberChange();
         } else {
-          this.propagateChange(undefined);
+          this.propagateChange(null);
         }
       }
     }
   }
 
-  public onPhoneNumberChange(): void {
+  onPhoneNumberChange(): void {
     this.value = this.phoneNumber;
 
     let number: lpn.PhoneNumber;
@@ -344,7 +387,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
         this.phoneNumber = this.removeDialCode(intlNo);
       }
 
-      this.propagateChange({
+      const value = this.ngxIntlTelModelAdapter.modelToValue({
         number: this.value,
         internationalNumber: intlNo,
         nationalNumber: number ? this.phoneUtil.format(number, lpn.PhoneNumberFormat.NATIONAL) : '',
@@ -352,10 +395,11 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
         dialCode: '+' + this.selectedCountry.dialCode,
         id: this.id
       });
+      this.propagateChange(value);
     }
   }
 
-  public onCountrySelect(country: Country, el?: HTMLInputElement): void {
+  onCountrySelect(country: Country, el?: HTMLInputElement): void {
     this.ngxDropdownService.close();
     this.setSelectedCountry(country);
     this.checkSeparateDialCodeStyle();
@@ -378,7 +422,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
       this.phoneNumber = this.removeDialCode(intlNo);
     }
 
-    this.propagateChange({
+    const value = this.ngxIntlTelModelAdapter.modelToValue({
       number: this.value,
       internationalNumber: intlNo,
       nationalNumber: number ? this.phoneUtil.format(number, lpn.PhoneNumberFormat.NATIONAL) : '',
@@ -386,32 +430,11 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
       dialCode: '+' + this.selectedCountry.dialCode,
       id: this.id
     });
+    this.propagateChange(value);
 
     if (el) {
       el.focus();
     }
-  }
-
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn: any) {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
-  writeValue(obj: any): void {
-    if (obj == null) {
-      this.init();
-    }
-    this.phoneNumber = obj;
-    setTimeout(() => {
-      this.onPhoneNumberChange();
-    }, 1);
   }
 
   removeDialCode(phoneNumber: string): string {
@@ -476,5 +499,13 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   openDropdown(): void {
     this.ngxDropdownService.openFromTemplate(this.dropdownTemplate, this.connectedElement, this.viewContainerRef);
     this.isMenuOpen();
+  }
+
+  onClearClick(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.phoneNumber = '';
+    this.propagateChange(null);
+    this.clear.emit();
   }
 }

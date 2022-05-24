@@ -24,6 +24,7 @@
         <div class="mb-2
                 ngx-intl-tel-input-wrapper">
             <ngx-intl-tel-input
+                    [clearable]="'close'"
                     [cssClass]="'custom'"
                     [disableCountrySelect]="disableCountrySelect"
                     [preferredCountries]="preferredCountries"
@@ -55,6 +56,9 @@
     </div>
     <div><strong>Is input touched:</strong>
         <pre>{{ f.form.controls['phone'].touched }}</pre>
+    </div>
+    <div><strong>Is input dirty:</strong>
+        <pre>{{ f.form.controls['phone'].dirty }}</pre>
     </div>
     <div><strong>Is form valid:</strong>
         <pre>{{ f.form.valid }}</pre>
