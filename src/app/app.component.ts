@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {CountryISO} from 'projects/ngx-intl-tel-input/src/lib/enums/country-iso.enum';
 import {SearchCountryField} from 'projects/ngx-intl-tel-input/src/lib/enums/search-country-field.enum';
 import {TooltipLabel} from 'projects/ngx-intl-tel-input/src/lib/enums/tooltip-label.enum';
@@ -29,8 +29,8 @@ export class AppComponent {
   TooltipLabel = TooltipLabel;
   CountryISO = CountryISO;
   preferredCountries: CountryISO[] = [CountryISO.Ukraine, CountryISO.Russia, CountryISO.Israel];
-  phoneForm = new FormGroup({
-    phone: new FormControl({
+  phoneForm = new UntypedFormGroup({
+    phone: new UntypedFormControl({
       'nationalNumber': '662233456',
       'dialCode': '380',
     }, [Validators.required])

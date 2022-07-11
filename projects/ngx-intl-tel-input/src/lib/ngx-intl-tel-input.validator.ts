@@ -1,9 +1,9 @@
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import * as lpn from 'google-libphonenumber';
 import {NgxIntlTelModelAdapter} from './services/ngx-intl-tel-model-adapter';
 
 export const phoneNumberValidator = (ngxIntlTelModelAdapter: NgxIntlTelModelAdapter) => {
-  return (control: FormControl) => {
+  return (control: UntypedFormControl) => {
     const id = control && control.value && control.value.id ? control.value.id : 'phone';
     const input = document.getElementById(id);
     if (!input) {
