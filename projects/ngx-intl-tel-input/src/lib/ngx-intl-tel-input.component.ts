@@ -17,7 +17,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
-import {FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
+import {UntypedFormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FloatLabelType} from '@angular/material/form-field';
 import * as lpn from 'google-libphonenumber';
@@ -258,7 +258,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   propagateChange = (_: IntlTelModel | null) => {
   };
 
-  control: FormControl;
+  control: UntypedFormControl;
 
   constructor(public readonly ngxIntlTelInputService: NgxIntlTelInputService,
               public readonly ngxIntlTelForm: NgxIntlTelFormService,
@@ -289,7 +289,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
     const ngControl: NgControl = this.injector.get(NgControl, null);
     if (ngControl) {
       setTimeout(() => {
-        this.control = ngControl.control as FormControl;
+        this.control = ngControl.control as UntypedFormControl;
       });
     }
   }
