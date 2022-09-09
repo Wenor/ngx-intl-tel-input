@@ -1,11 +1,11 @@
-import {UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {PhoneNumber, PhoneNumberUtil} from 'google-libphonenumber';
 import {INgxIntlTelInputComponent} from './interfaces/ngx-intl-tel-input-component.interface';
 import {NgxIntlTelModelAdapter} from './services/ngx-intl-tel-model-adapter';
 
 export const phoneNumberValidator = (ngxIntlTelInputComponent: INgxIntlTelInputComponent,
                                      ngxIntlTelModelAdapter: NgxIntlTelModelAdapter<unknown>) => {
-  return (control: UntypedFormControl) => {
+  return (control: FormControl) => {
     if (!ngxIntlTelInputComponent.phoneValidation) {
       return null;
     }
