@@ -2,10 +2,24 @@ import {Injectable} from '@angular/core';
 import {IntlTelModel} from '../model/intl-tel.model';
 
 @Injectable()
-export abstract class NgxIntlTelModelAdapter {
+export abstract class NgxIntlTelModelAdapter<T> {
 
-  abstract valueToString(value: unknown): string;
+  /**
+   * Transform form control value to string phone number
+   * @param value
+   */
+  abstract controlValueToString(value: T): string;
 
-  abstract modelToValue(intlTelModel: IntlTelModel);
+  /**
+   * Transform internal phone number model to form control value
+   * @param intlTelModel
+   */
+  abstract libPhoneNumberModelToControlValue(intlTelModel: IntlTelModel | null): T;
+
+  /**
+   * Validation value used in phone number validator
+   * @param value
+   */
+  abstract getValidationValue(value: T): string;
 
 }
