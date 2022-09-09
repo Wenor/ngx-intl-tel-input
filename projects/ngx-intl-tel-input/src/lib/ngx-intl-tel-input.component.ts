@@ -258,7 +258,7 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
 
   onTouched = () => {};
 
-  propagateChange = (value: IntlTelModel | null) => {};
+  propagateChange = (model: IntlTelModel | null) => {};
 
   control: UntypedFormControl;
 
@@ -297,8 +297,8 @@ export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewIni
   }
 
   registerOnChange(fn: any): void {
-    this.propagateChange = (intlTelModel) => {
-      fn(this.ngxIntlTelModelAdapter.libPhoneNumberModelToControlValue(intlTelModel));
+    this.propagateChange = (model) => {
+      fn(this.ngxIntlTelModelAdapter.libPhoneNumberModelToControlValue(model));
     };
   }
 
