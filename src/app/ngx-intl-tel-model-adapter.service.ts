@@ -4,17 +4,25 @@ import {NgxIntlTelModelAdapter} from '../../projects/ngx-intl-tel-input/src/lib/
 import {PhoneModel} from './phone.model';
 
 @Injectable()
-export class NgxIntlTelModelAdapterService extends NgxIntlTelModelAdapter {
+export class NgxIntlTelModelAdapterService extends NgxIntlTelModelAdapter<PhoneModel> {
 
-  valueToString(value: PhoneModel): string {
+  controlValueToString(value: PhoneModel | null): string {
     return value ? `+${value.dialCode}${value.nationalNumber}` : '';
   }
 
-  modelToValue(intlTelModel: IntlTelModel) {
-    return {
-      'nationalNumber': intlTelModel.number.replace(intlTelModel.dialCode, ''),
-      'dialCode': intlTelModel.dialCode.replace('+', ''),
-    };
+  libPhoneNumberModelToControlValue(intlTelModel: IntlTelModel | null) {
+    if (intlTelModel) {
+      return {
+        'nationalNumber': intlTelModel.number.replace(intlTelModel.dialCode, ''),
+        'dialCode': intlTelModel.dialCode.replace('+', ''),
+      };
+    }
+    return null;
+  }
+
+  getValidationValue(value: PhoneModel | null) {
+    return (value && (value.dialCode || value.nationalNumber))
+      ? this.controlValueToString(value) : '';
   }
 
 }
