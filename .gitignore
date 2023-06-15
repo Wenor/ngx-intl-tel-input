@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+!/dist/ngx-intl-tel-input
 /tmp
 /out-tsc
 
