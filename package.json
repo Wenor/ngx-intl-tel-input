@@ -1,6 +1,6 @@
 {
   "name": "@wenor/ngx-intl-tel-input",
-  "version": "16.0.0",
+  "version": "16.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4256",
@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build ngx-intl-tel-input",
+    "build_lib": "ng build ngx-intl-tel-input && cp-cli ./dist/ngx-intl-tel-input ./dist_lib",
     "copy-license": "cp-cli LICENSE ./dist/ngx-intl-tel-input/LICENSE",
     "copy-readme": "cp-cli README.md ./dist/ngx-intl-tel-input/README.md",
     "copy-files": "npm run copy-license && npm run copy-readme",
