@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {NgxIntlTelInputModule} from 'projects/ngx-intl-tel-input/src/lib/ngx-intl-tel-input.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
