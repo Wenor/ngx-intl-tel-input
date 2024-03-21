@@ -1,0 +1,57 @@
+{
+  "name": "@wenor/ngx-intl-tel-input",
+  "version": "14.0.0",
+  "peerDependencies": {
+    "@angular/cdk": "^14.0.4",
+    "@angular/common": "^14.0.5",
+    "@angular/core": "^14.0.5",
+    "@angular/forms": "^14.0.5",
+    "@angular/material": "^14.0.4",
+    "google-libphonenumber": "^3.2.27",
+    "intl-tel-input": "^17.0.16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenor/ngx-intl-tel-input"
+  },
+  "author": {
+    "name": "christianopaets",
+    "email": "k.opayets@wenortech.com"
+  },
+  "keywords": [
+    "angular",
+    "ng2",
+    "ng4",
+    "ng5",
+    "ng6",
+    "ng7",
+    "ng8",
+    "angular 8",
+    "intl-tel-input",
+    "phone number",
+    "validation"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webcat12345/ngx-intl-tel-input/issues"
+  },
+  "main": "fesm2022/wenor-ngx-intl-tel-input.mjs",
+  "module": "fesm2022/wenor-ngx-intl-tel-input.mjs",
+  "fesm2022": "fesm2022/wenor-ngx-intl-tel-input.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2022": "./esm2022/wenor-ngx-intl-tel-input.mjs",
+      "esm": "./esm2022/wenor-ngx-intl-tel-input.mjs",
+      "default": "./fesm2022/wenor-ngx-intl-tel-input.mjs"
+    }
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
