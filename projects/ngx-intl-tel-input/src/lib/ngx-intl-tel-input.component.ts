@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {FloatLabelType} from '@angular/material/form-field';
+import {LegacyFloatLabelType as FloatLabelType} from '@angular/material/legacy-form-field';
 import * as lpn from 'google-libphonenumber';
 import {CountryCode} from './data/country-code';
 import {CountryDropdownDisplayOptions} from './enums/country-dropdown-display-options.enum';
