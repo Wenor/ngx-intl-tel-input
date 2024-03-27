@@ -1,7 +1,0 @@
-export var CountryDropdownDisplayOptions;
-(function (CountryDropdownDisplayOptions) {
-    CountryDropdownDisplayOptions[CountryDropdownDisplayOptions["Flag"] = 0] = "Flag";
-    CountryDropdownDisplayOptions[CountryDropdownDisplayOptions["Name"] = 1] = "Name";
-    CountryDropdownDisplayOptions[CountryDropdownDisplayOptions["Dial"] = 2] = "Dial";
-})(CountryDropdownDisplayOptions || (CountryDropdownDisplayOptions = {}));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY291bnRyeS1kcm9wZG93bi1kaXNwbGF5LW9wdGlvbnMuZW51bS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3Byb2plY3RzL25neC1pbnRsLXRlbC1pbnB1dC9zcmMvbGliL2VudW1zL2NvdW50cnktZHJvcGRvd24tZGlzcGxheS1vcHRpb25zLmVudW0udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFOLElBQVksNkJBSVg7QUFKRCxXQUFZLDZCQUE2QjtJQUN2QyxpRkFBSSxDQUFBO0lBQ0osaUZBQUksQ0FBQTtJQUNKLGlGQUFJLENBQUE7QUFDTixDQUFDLEVBSlcsNkJBQTZCLEtBQTdCLDZCQUE2QixRQUl4QyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBlbnVtIENvdW50cnlEcm9wZG93bkRpc3BsYXlPcHRpb25zIHtcclxuICBGbGFnLFxyXG4gIE5hbWUsXHJcbiAgRGlhbFxyXG59XHJcbiJdfQ==

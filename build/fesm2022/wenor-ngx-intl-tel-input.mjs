@@ -21,9 +21,9 @@ import * as i2 from '@angular/material/icon';
 import { MatIconModule } from '@angular/material/icon';
 import * as i3 from '@angular/material/tooltip';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSelectModule } from '@angular/material/select';
-import { MatMenuModule } from '@angular/material/menu';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 // noinspection NonAsciiCharacters,JSNonASCIINames
 var CountryISO;
