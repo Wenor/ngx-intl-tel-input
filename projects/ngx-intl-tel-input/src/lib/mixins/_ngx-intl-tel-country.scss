@@ -1,5 +1,5 @@
 @mixin mat-menu-content {
-  .mat-menu-content {
+  .mat-mdc-menu-content {
     @content
   }
 }
@@ -14,7 +14,7 @@
 
 @mixin mat-menu-item {
   @include mat-menu-content {
-    .mat-menu-item {
+    .mat-mdc-menu-item {
       @content;
     }
   }

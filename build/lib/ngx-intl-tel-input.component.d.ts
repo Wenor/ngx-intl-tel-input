@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, Injector, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ControlValueAccessor, FormControl } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { LegacyFloatLabelType as FloatLabelType } from '@angular/material/legacy-form-field';
+import { FloatLabelType } from '@angular/material/form-field';
 import { CountryDropdownDisplayOptions } from './enums/country-dropdown-display-options.enum';
 import { CountryISO } from './enums/country-iso.enum';
 import { TooltipLabel } from './enums/tooltip-label.enum';
