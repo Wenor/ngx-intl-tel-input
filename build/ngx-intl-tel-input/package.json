@@ -35,9 +35,7 @@
   "bugs": {
     "url": "https://github.com/webcat12345/ngx-intl-tel-input/issues"
   },
-  "main": "fesm2022/wenor-ngx-intl-tel-input.mjs",
   "module": "fesm2022/wenor-ngx-intl-tel-input.mjs",
-  "fesm2022": "fesm2022/wenor-ngx-intl-tel-input.mjs",
   "typings": "index.d.ts",
   "exports": {
     "./package.json": {
