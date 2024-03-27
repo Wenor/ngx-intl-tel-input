@@ -17,24 +17,24 @@ import {
   ViewContainerRef,
   ViewEncapsulation
 } from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import {FloatLabelType} from '@angular/material/form-field';
+import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { LegacyFloatLabelType as FloatLabelType } from '@angular/material/legacy-form-field';
 import * as lpn from 'google-libphonenumber';
-import {CountryCode} from './data/country-code';
-import {CountryDropdownDisplayOptions} from './enums/country-dropdown-display-options.enum';
-import {CountryISO} from './enums/country-iso.enum';
-import {SearchCountryField} from './enums/search-country-field.enum';
-import {TooltipLabel} from './enums/tooltip-label.enum';
-import {INgxIntlTelInputComponent} from './interfaces/ngx-intl-tel-input-component.interface';
-import {Country} from './model/country.model';
-import {IntlTelModel} from './model/intl-tel.model';
-import {phoneNumberValidator} from './ngx-intl-tel-input.validator';
-import {NgxDropdownService} from './services/ngx-dropdown.service';
-import {NgxIntlTelFormService} from './services/ngx-intl-tel-form.service';
-import {NgxIntlTelInputErrorMatcher} from './services/ngx-intl-tel-input-error-matcher';
-import {NgxIntlTelInputService} from './services/ngx-intl-tel-input.service';
-import {NgxIntlTelModelAdapter} from './services/ngx-intl-tel-model-adapter';
+import { CountryCode } from './data/country-code';
+import { CountryDropdownDisplayOptions } from './enums/country-dropdown-display-options.enum';
+import { CountryISO } from './enums/country-iso.enum';
+import { SearchCountryField } from './enums/search-country-field.enum';
+import { TooltipLabel } from './enums/tooltip-label.enum';
+import { INgxIntlTelInputComponent } from './interfaces/ngx-intl-tel-input-component.interface';
+import { Country } from './model/country.model';
+import { IntlTelModel } from './model/intl-tel.model';
+import { phoneNumberValidator } from './ngx-intl-tel-input.validator';
+import { NgxDropdownService } from './services/ngx-dropdown.service';
+import { NgxIntlTelFormService } from './services/ngx-intl-tel-form.service';
+import { NgxIntlTelInputErrorMatcher } from './services/ngx-intl-tel-input-error-matcher';
+import { NgxIntlTelInputService } from './services/ngx-intl-tel-input.service';
+import { NgxIntlTelModelAdapter } from './services/ngx-intl-tel-model-adapter';
 
 let ngxIntlTelInputId = 0;
 
