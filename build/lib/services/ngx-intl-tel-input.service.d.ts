@@ -1,4 +1,3 @@
-/// <reference types="projects/ngx-intl-tel-input/node_modules/@types/google-libphonenumber" />
 import { CountryCode } from '../data/country-code';
 import { Country } from '../model/country.model';
 import * as lpn from 'google-libphonenumber';
