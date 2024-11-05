@@ -41,7 +41,7 @@ let ngxIntlTelInputId = 0;
 @Component({
   selector: 'ngx-intl-tel-input',
   templateUrl: './ngx-intl-tel-input.component.html',
-  styleUrls: ['./ngx-intl-tel-input.component.scss'],
+  styleUrls: [/* './ngx-intl-tel-input.component.scss' */],
   encapsulation: ViewEncapsulation.None,
   providers: [
     CountryCode,

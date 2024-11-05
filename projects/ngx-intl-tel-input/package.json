@@ -1,6 +1,6 @@
 {
   "name": "@wenor/ngx-intl-tel-input",
-  "version": "18.0.0",
+  "version": "18.0.1",
   "peerDependencies": {
     "@angular/cdk": "^18.2.11",
     "@angular/common": "^18.2.10",
