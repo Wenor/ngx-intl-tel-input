@@ -1,12 +1,12 @@
 {
   "name": "@wenor/ngx-intl-tel-input",
-  "version": "18.0.1",
+  "version": "20.0.0",
   "peerDependencies": {
-    "@angular/cdk": "^18.2.11",
-    "@angular/common": "^18.2.10",
-    "@angular/core": "^18.2.10",
-    "@angular/forms": "^18.2.10",
-    "@angular/material": "^18.2.11",
+    "@angular/cdk": "^20.2.14",
+    "@angular/common": "^20.3.13",
+    "@angular/core": "^20.3.13",
+    "@angular/forms": "^20.3.13",
+    "@angular/material": "^20.2.14",
     "google-libphonenumber": "^3.2.27",
     "intl-tel-input": "^18.1.6"
   },

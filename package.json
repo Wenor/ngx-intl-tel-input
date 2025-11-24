@@ -1,6 +1,6 @@
 {
   "name": "@wenor/ngx-intl-tel-input",
-  "version": "18.0.1",
+  "version": "20.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Wenor/ngx-intl-tel-input.git"
@@ -11,8 +11,6 @@
     },
     ".": {
       "types": "./build/index.d.ts",
-      "esm2022": "./build/esm2022/wenor-ngx-intl-tel-input.mjs",
-      "esm": "./build/esm2022/wenor-ngx-intl-tel-input.mjs",
       "default": "./build/fesm2022/wenor-ngx-intl-tel-input.mjs"
     }
   },
