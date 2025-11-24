@@ -6,8 +6,8 @@
     "url": "https://github.com/Wenor/ngx-intl-tel-input.git"
   },
   "exports": {
-    "./package.json": {
-      "default": "./package.json"
+    "./build/package.json": {
+      "default": "./build/package.json"
     },
     ".": {
       "types": "./build/index.d.ts",
