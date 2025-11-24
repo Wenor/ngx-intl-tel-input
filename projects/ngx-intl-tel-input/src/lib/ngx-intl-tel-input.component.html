@@ -1,68 +1,76 @@
 <div class="ngx-intl-tel"
-     [class.ngx-intl-tel_stroked]="stroked"
-     [class.ngx-intl-tel_error]="invalid && (dirtyAndTouched || (ngxIntlTelForm.submitted$ | async))"
-     [class.ngx-intl-tel_opened]="ngxDropdownService.menuState$ | async"
-     [class.ngx-intl-tel_focus]="isFocused">
-    <ngx-intl-tel-trigger *ngIf="!disableCountrySelect"
-                          class="ngx-intl-tel__trigger"
-                          [class.ngx-intl-tel__trigger_small]="small"
-                          #connectedElement
-                          [country]="selectedCountry"
-                          [isError]="invalid && (dirtyAndTouched || (ngxIntlTelForm.submitted$ | async))"
-                          [isMenuOpened]="ngxDropdownService.menuState$ | async"
-                          [tooltipField]="tooltipField"
-                          [stroked]="stroked"
-                          (click)="openDropdown()">
+  [class.ngx-intl-tel_stroked]="stroked"
+  [class.ngx-intl-tel_error]="invalid && (dirtyAndTouched || (ngxIntlTelForm.submitted$ | async))"
+  [class.ngx-intl-tel_opened]="ngxDropdownService.menuState$ | async"
+  [class.ngx-intl-tel_focus]="isFocused">
+  @if (!disableCountrySelect) {
+    <ngx-intl-tel-trigger
+      class="ngx-intl-tel__trigger"
+      [class.ngx-intl-tel__trigger_small]="small"
+      #connectedElement
+      [country]="selectedCountry"
+      [isError]="invalid && (dirtyAndTouched || (ngxIntlTelForm.submitted$ | async))"
+      [isMenuOpened]="ngxDropdownService.menuState$ | async"
+      [tooltipField]="tooltipField"
+      [stroked]="stroked"
+      (click)="openDropdown()">
     </ngx-intl-tel-trigger>
-    <mat-form-field [floatLabel]="floatLabel"
-                    class="ngx-intl-tel__form-field"
-                    [class.ngx-intl-tel__form-field_small]="small">
-        <mat-label class="ngx-intl-tel__label">
-            {{ inputLabel }}
-        </mat-label>
-        <input class="ngx-intl-tel__input"
-               #focusable
-               matInput
-               type="tel"
-               autocomplete="off"
-               [id]="id"
-               [ngClass]="cssClass"
-               [disabled]="disabled"
-               [placeholder]="removeDialCode(selectedCountry?.placeHolder || '')"
-               [attr.maxLength]="maxLength"
-               [attr.validation]="phoneValidation"
-               [errorStateMatcher]="errorStateMatcher"
-               [(ngModel)]="phoneNumber"
-               (ngModelChange)="onPhoneNumberChange()"
-               (blur)="onBlurEvent()"
-               (focus)="onFocusEvent()"
-               (keydown)="ngxIntlTelInputService.onInputKeyPress($event)">
-        <button *ngIf="clearIcon"
-                mat-icon-button
-                matSuffix
-                (click)="onClearClick($event)">
-            <mat-icon>{{ clearIcon }}</mat-icon>
+  }
+  <mat-form-field [floatLabel]="floatLabel"
+    class="ngx-intl-tel__form-field"
+    [class.ngx-intl-tel__form-field_small]="small">
+    <mat-label class="ngx-intl-tel__label">
+      {{ inputLabel }}
+    </mat-label>
+    <input class="ngx-intl-tel__input"
+      #focusable
+      matInput
+      type="tel"
+      autocomplete="off"
+      [id]="id"
+      [ngClass]="cssClass"
+      [disabled]="disabled"
+      [placeholder]="removeDialCode(selectedCountry?.placeHolder || '')"
+      [attr.maxLength]="maxLength"
+      [attr.validation]="phoneValidation"
+      [errorStateMatcher]="errorStateMatcher"
+      [(ngModel)]="phoneNumber"
+      (ngModelChange)="onPhoneNumberChange()"
+      (blur)="onBlurEvent()"
+      (focus)="onFocusEvent()"
+      (keydown)="ngxIntlTelInputService.onInputKeyPress($event)">
+      @if (clearIcon) {
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="onClearClick($event)">
+          <mat-icon>{{ clearIcon }}</mat-icon>
         </button>
-        <mat-error *ngIf="matErrorContainer.children.length === 0 && hasError">
-            {{ (errors && errors[errorKey]) || control.getError(errorKey) }}
+      }
+      @if (matErrorContainer.children.length === 0 && hasError) {
+        <mat-error>
+          {{ (errors && errors[errorKey]) || control.getError(errorKey) }}
         </mat-error>
-        <div #matErrorContainer>
-            <ng-content select="mat-error"></ng-content>
-        </div>
+      }
+      <div #matErrorContainer>
+        <ng-content select="mat-error"></ng-content>
+      </div>
     </mat-form-field>
     <ng-template #dropdownTemplate>
-        <div [class]="dropdownClass">
-            <ngx-intl-tel-country [countries]="preferredCountriesInDropDown"
-                                  [dropdownParams]="dropdownParamsData"
-                                  [stroked]="stroked"
-                                  (countryClick)="onCountrySelect($event, focusable)">
-            </ngx-intl-tel-country>
-            <mat-divider *ngIf="preferredCountriesInDropDown?.length"></mat-divider>
-            <ngx-intl-tel-country [countries]="ngxIntlTelInputService.allCountries"
-                                  [dropdownParams]="dropdownParamsData"
-                                  [stroked]="stroked"
-                                  (countryClick)="onCountrySelect($event, focusable)">
-            </ngx-intl-tel-country>
-        </div>
+      <div [class]="dropdownClass">
+        <ngx-intl-tel-country [countries]="preferredCountriesInDropDown"
+          [dropdownParams]="dropdownParamsData"
+          [stroked]="stroked"
+          (countryClick)="onCountrySelect($event, focusable)">
+        </ngx-intl-tel-country>
+        @if (preferredCountriesInDropDown?.length) {
+          <mat-divider></mat-divider>
+        }
+        <ngx-intl-tel-country [countries]="ngxIntlTelInputService.allCountries"
+          [dropdownParams]="dropdownParamsData"
+          [stroked]="stroked"
+          (countryClick)="onCountrySelect($event, focusable)">
+        </ngx-intl-tel-country>
+      </div>
     </ng-template>
-</div>
+  </div>

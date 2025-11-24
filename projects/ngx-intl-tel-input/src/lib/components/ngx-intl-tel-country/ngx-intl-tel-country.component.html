@@ -1,14 +1,21 @@
-<button class="ngx-intl-tel-country"
-        [class.ngx-intl-tel-country_stroked]="stroked"
-        [id]="country.iso2"
-        *ngFor="let country of countries"
-        (click)="countryClick.emit(country)">
-    <span *ngIf="showFlag"
+@for (country of countries; track country) {
+  <button class="ngx-intl-tel-country"
+    [class.ngx-intl-tel-country_stroked]="stroked"
+    [id]="country.iso2"
+    (click)="countryClick.emit(country)">
+    @if (showFlag) {
+      <span
           class="iti-flag
                  ngx-intl-tel-country__flag"
-          [ngClass]="country.flagClass"></span>
-    <span *ngIf="showName"
-          class="ngx-intl-tel-country__name">{{country.name}}</span>
-    <span *ngIf="showDial"
-          class="ngx-intl-tel-country__dial">+{{country.dialCode}}</span>
-</button>
+      [ngClass]="country.flagClass"></span>
+    }
+    @if (showName) {
+      <span
+      class="ngx-intl-tel-country__name">{{country.name}}</span>
+    }
+    @if (showDial) {
+      <span
+      class="ngx-intl-tel-country__dial">+{{country.dialCode}}</span>
+    }
+  </button>
+}

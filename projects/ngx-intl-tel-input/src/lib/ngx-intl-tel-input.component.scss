@@ -55,7 +55,7 @@ $box-shadow: 0 5px 24px rgba(57, 65, 92, 0.15);
 
       &.mat-mdc-form-field {
         @include mat.icon-button-density(-4);
-        --mdc-filled-text-field-container-color: transparent;
+        --mat-form-field-filled-container-color: transparent;
         padding-left: 0;
         position: relative;
         .mat-mdc-form-field-focus-overlay,

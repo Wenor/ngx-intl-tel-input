@@ -3,11 +3,12 @@ import {Country} from '../../model/country.model';
 import {TooltipLabel} from '../../enums/tooltip-label.enum';
 
 @Component({
-  selector: 'ngx-intl-tel-trigger',
-  templateUrl: './ngx-intl-tel-trigger.component.html',
-  styleUrls: ['./ngx-intl-tel-trigger.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'ngx-intl-tel-trigger',
+    templateUrl: './ngx-intl-tel-trigger.component.html',
+    styleUrls: ['./ngx-intl-tel-trigger.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgxIntlTelTriggerComponent {
 

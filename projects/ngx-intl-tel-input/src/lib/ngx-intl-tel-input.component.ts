@@ -39,29 +39,29 @@ import { NgxIntlTelModelAdapter } from './services/ngx-intl-tel-model-adapter';
 let ngxIntlTelInputId = 0;
 
 @Component({
-  selector: 'ngx-intl-tel-input',
-  templateUrl: './ngx-intl-tel-input.component.html',
-  styleUrls: [/* './ngx-intl-tel-input.component.scss' */],
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    CountryCode,
-    NgxIntlTelInputService,
-    {
-      provide: NG_VALUE_ACCESSOR,
-      // tslint:disable-next-line:no-forward-ref
-      useExisting: forwardRef(() => NgxIntlTelInputComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useFactory: (ngxIntlTelInputComponent: INgxIntlTelInputComponent,
-                   ngxIntlTelModelAdapter: NgxIntlTelModelAdapter<unknown>) => {
-        return phoneNumberValidator(ngxIntlTelInputComponent, ngxIntlTelModelAdapter);
-      },
-      deps: [NgxIntlTelInputComponent, NgxIntlTelModelAdapter],
-      multi: true,
-    }
-  ]
+    selector: 'ngx-intl-tel-input',
+    templateUrl: './ngx-intl-tel-input.component.html',
+    styleUrls: [ /* './ngx-intl-tel-input.component.scss' */],
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        CountryCode,
+        NgxIntlTelInputService,
+        {
+            provide: NG_VALUE_ACCESSOR,
+            // tslint:disable-next-line:no-forward-ref
+            useExisting: forwardRef(() => NgxIntlTelInputComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useFactory: (ngxIntlTelInputComponent: INgxIntlTelInputComponent, ngxIntlTelModelAdapter: NgxIntlTelModelAdapter<unknown>) => {
+                return phoneNumberValidator(ngxIntlTelInputComponent, ngxIntlTelModelAdapter);
+            },
+            deps: [NgxIntlTelInputComponent, NgxIntlTelModelAdapter],
+            multi: true,
+        }
+    ],
+    standalone: false
 })
 export class NgxIntlTelInputComponent implements OnInit, OnChanges, AfterViewInit, ControlValueAccessor, INgxIntlTelInputComponent {
 

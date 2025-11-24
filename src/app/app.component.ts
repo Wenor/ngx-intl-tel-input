@@ -10,14 +10,15 @@ import {NgxIntlTelModelAdapter} from '../../projects/ngx-intl-tel-input/src/lib/
 import {NgxIntlTelModelAdapterService} from './ngx-intl-tel-model-adapter.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{
-    provide: NgxIntlTelModelAdapter,
-    useClass: NgxIntlTelModelAdapterService
-  }]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [{
+            provide: NgxIntlTelModelAdapter,
+            useClass: NgxIntlTelModelAdapterService
+        }],
+    standalone: false
 })
 export class AppComponent {
   separateDialCode = false;
