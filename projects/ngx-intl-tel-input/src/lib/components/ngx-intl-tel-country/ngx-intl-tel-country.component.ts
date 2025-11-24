@@ -10,11 +10,12 @@ import {Country} from '../../model/country.model';
 import {CountryDropdownDisplayOptions} from '../../enums/country-dropdown-display-options.enum';
 
 @Component({
-  selector: 'ngx-intl-tel-country',
-  templateUrl: './ngx-intl-tel-country.component.html',
-  styleUrls: ['./ngx-intl-tel-country.component.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'ngx-intl-tel-country',
+    templateUrl: './ngx-intl-tel-country.component.html',
+    styleUrls: ['./ngx-intl-tel-country.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class NgxIntlTelCountryComponent {
 
