@@ -1,6 +1,10 @@
 {
   "name": "@wenor/ngx-intl-tel-input",
   "version": "18.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wenor/ngx-intl-tel-input.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4800",
