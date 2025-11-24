@@ -5,6 +5,17 @@
     "type": "git",
     "url": "https://github.com/Wenor/ngx-intl-tel-input.git"
   },
+  "exports": {
+    "./build/package.json": {
+      "default": "./build/package.json"
+    },
+    ".": {
+      "types": "./build/index.d.ts",
+      "esm2022": "./build/esm2022/wenor-ngx-intl-tel-input.mjs",
+      "esm": "./build/esm2022/wenor-ngx-intl-tel-input.mjs",
+      "default": "./build/fesm2022/wenor-ngx-intl-tel-input.mjs"
+    }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4800",
